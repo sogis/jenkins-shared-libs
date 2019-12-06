@@ -17,5 +17,5 @@ def call(){
             echo "Using project: ${openshift.project()}"
         }
     }
-    return ${version}
+    return version
 }
