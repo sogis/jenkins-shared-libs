@@ -1,3 +1,5 @@
 def call(){
-    echo "job"   
+    stage('preamble') {
+        echo "job"
+    }
 }
