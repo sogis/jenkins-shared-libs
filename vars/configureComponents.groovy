@@ -1,5 +1,4 @@
 def call(credentials){
-    echo credentials
     openshift.withCluster() {
         openshift.withProject('gdi-devel') {
             withCredentials ( credentials ) { 
