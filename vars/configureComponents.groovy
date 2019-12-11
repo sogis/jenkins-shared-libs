@@ -1,4 +1,4 @@
-def call(String credentials){
+def call(Map credentials){
     openshift.withCluster() {
         openshift.withProject('gdi-devel') {
             withCredentials ( credentials ) { 
