@@ -5,8 +5,8 @@ def call(List credentials, String args, String appName){
                 withCredentials(credentials) {
                     openshift.verbose()
                 
-                    println "${gitlabPwd}"
-                    println "${gitlabToken}"
+                    println ${gitlabPwd}
+                    println ${gitlabToken}
                     def bc = openshift.newBuild( "https://${gitlabUser}:${gitlabPwd}@git.sourcepole.ch/ktso/somap.git", "${args}")
                     def builds = bc.related('builds')
                     // Wait until all builds finished
