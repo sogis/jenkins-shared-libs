@@ -1,4 +1,4 @@
-def call(appName) {
+def call(String appName, String newImage) {
     openshift.withCluster() {
         openshift.withProject('gdi-devel') {
             dc = openshift.selector( "dc/${appName}" ).object()
