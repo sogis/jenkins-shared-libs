@@ -7,7 +7,7 @@ def call(String appName, String newImage) {
                 def builds = openshift.selector( "bc", appName).startBuild( "--wait" )
             }
             else {
-                println "No build because Image already used"
+                println "No build for ${appName} because Image already used"
             }
         }
     }
