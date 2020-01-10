@@ -1,7 +1,7 @@
 def call(String appName, String newImage) {
     openshift.withCluster() {
         openshift.withProject('gdi-devel') {
-            if ( dc.spec.template.spec.containers[0].image.exists() ) {
+            if ( openshift.selector( "dc/${appName}" ).object().exists() ) {
                 dc = openshift.selector( "dc/${appName}" ).object()
                 dcImage = dc.spec.template.spec.containers[0].image
             }
