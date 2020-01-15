@@ -8,7 +8,7 @@ def call(String appName, String version) {
             else {
                 dcImage = ''
             }
-            if ( dcImage != newImage ) { 
+            if ( dcImage != version ) { 
                 openshift.tag( "${appName}:latest", "${appName}:${version}")
             }
             else {
