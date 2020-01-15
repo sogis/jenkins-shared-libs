@@ -9,6 +9,8 @@ def call(String appName, String newImage) {
                 dcImage = ''
             }
             if ( dcImage != newImage ) { 
+                println dcImage
+                println newImage
                 def builds = openshift.selector( "bc", appName).startBuild( "--wait" )
             }
             else {
