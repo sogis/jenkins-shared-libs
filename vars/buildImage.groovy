@@ -1,8 +1,7 @@
-def call(String appName, String newImage) {
+def call(String appName, String newImage, String repo) {
     openshift.withCluster() {
         openshift.withProject('gdi-devel') {
             if ( openshift.selector( "dc/${appName}" ).exists() ) {
-                println "test"
                 dc = openshift.selector( "dc/${appName}" ).object()
                 dcImage = dc.spec.template.spec.containers[0].image
             }
@@ -12,6 +11,8 @@ def call(String appName, String newImage) {
             if ( dcImage != newImage ) { 
                 println dcImage
                 println newImage
+                def buildConfig = openshift.process( "${repo}/buildconfig.yaml" )
+                openshift.apply( buildConfig )
                 def builds = openshift.selector( "bc", appName).startBuild( "--wait" )
             }
             else {
