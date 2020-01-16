@@ -1,4 +1,4 @@
-def call(List credentials String repo String stage){
+def call(List credentials, String repo, String stage){
     openshift.withCluster() {
         openshift.withProject( stage ) {
             withCredentials ( credentials ) { 
