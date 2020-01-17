@@ -13,7 +13,7 @@ def call(String appName, String newImage, String repo) {
                 println newImage
                 def buildConfig = openshift.process( "${repo}/buildconfig.yaml" )
                 openshift.apply( buildConfig )
-                def builds = openshift.selector( "bc", appName).startBuild( "--wait" )
+                def builds = openshift.selector( "bc", appName).startBuild( "--wait", "--build-arg QWC2_VERSION=${newImage}", "--build-arg GIT_VERSION=${newImage}" )
             }
             else {
                 println "No build for ${appName} because Image already used"
