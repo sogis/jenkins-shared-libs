@@ -11,15 +11,11 @@ def call(){
                    description: 'Soll das Image gebaut werden?',
                    name: 'build')
             ])
-
-    version = inputParams.version
-    building = inputParams.build
-    echo "${version}"
     
     openshift.withCluster() {
         openshift.withProject('gdi-devel') {
             echo "Using project: ${openshift.project()}"
         }
     }
-    return version, building
+    return inputParams
 }
