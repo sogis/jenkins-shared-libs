@@ -10,8 +10,8 @@ def call(){
             choice(defaultValue: 'ja', 
                    choices: ['ja','nein'].join('\n'),
                    description: 'Soll das Image gebaut werden?'
-                   name: 'build'
-        ])
+                   name: 'build')
+            ])
 
     version = inputParams.version
     building = inputParams.build
