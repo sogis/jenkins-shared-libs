@@ -4,7 +4,7 @@ def call(){
     def inputParams = input(
         id: 'selectVersion', 
         message: 'Bitte Version angeben und ob das Image gebaut werden soll',
-        ok: 'Start Pipeline'
+        ok: 'Start Pipeline',
         parameters: [
             string(defaultValue: 'None',
                    description: 'Bitte Version auswählen',
