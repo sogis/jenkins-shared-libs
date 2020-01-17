@@ -7,9 +7,8 @@ def call(){
             string(defaultValue: 'None',
                    description: 'Bitte Version auswählen',
                    name: 'version'),
-            choice(defaultValue: 'ja', 
-                   choices: ['ja','nein'].join('\n'),
-                   description: 'Soll das Image gebaut werden?'
+            choice(choices: ['ja','nein'].join('\n'),
+                   description: 'Soll das Image gebaut werden?',
                    name: 'build')
             ])
 
