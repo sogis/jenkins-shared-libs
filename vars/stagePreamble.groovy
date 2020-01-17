@@ -21,9 +21,8 @@ def call(){
                                         parameters: [
                                         choice(name: 'ENVIRONMENT', choices: ['dev','qa'].join('\n'), description: 'Please select the Environment'),
                                         choice(name: 'IMAGE_TAG', choices: getDockerImages(), description: 'Available Docker Images')]
-                        env.ENVIRONMENT = INPUT_PARAMS.ENVIRONMENT
-                        env.IMAGE_TAG = INPUT_PARAMS.IMAGE_TAG
-                    }
+    env.ENVIRONMENT = INPUT_PARAMS.ENVIRONMENT
+    env.IMAGE_TAG = INPUT_PARAMS.IMAGE_TAG
 
     version = userInput?:''
     newImage = "docker-registry.default.svc:5000/gdi-devel/qwc-service:${version}"
