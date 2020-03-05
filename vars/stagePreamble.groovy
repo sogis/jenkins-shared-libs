@@ -19,7 +19,5 @@ def call(){
             echo "Using project: ${openshift.project()}"
         }
     }
-    println inputParams.version
-    println inputParams.build
     return inputParams
 }
