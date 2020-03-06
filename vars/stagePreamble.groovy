@@ -10,7 +10,7 @@ def call(){
                    name: 'version'),
             string(defaultValue: '2.0.14',
                    description: 'Bitte QWC Version auswählen',
-                   name: 'qwc-version'),
+                   name: 'qwcVersion'),
             string(defaultValue: 'ja',
                    description: 'Soll das Image gebaut werden?',
                    name: 'build')
