@@ -2,13 +2,15 @@ def call(){
     def version
     def building
     def inputParams = input(
-        message: 'Bitte Version angeben und ob das Image gebaut werden soll',
+        message: 'Bitte Versionen angeben und ob das Image gebaut werden soll',
         ok: 'Start Pipeline',
         parameters: [
-            string(defaultValue: 'None',
+            string(defaultValue: '2.0.8',
                    description: 'Bitte Version auswählen',
                    name: 'version'),
-            //choice(choices: ['ja','nein'].join('\n'),
+            string(defaultValue: '2.0.14',
+                   description: 'Bitte QWC Version auswählen',
+                   name: 'qwc-version'),
             string(defaultValue: 'ja',
                    description: 'Soll das Image gebaut werden?',
                    name: 'build')
