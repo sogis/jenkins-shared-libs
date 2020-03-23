@@ -1,6 +1,6 @@
 def call(List credentials, String repo, String stage, String parameters){
     sh """
-       oc process $parameters | oc apply -f- 
+       oc process $parameters | oc apply -n $stage -f- 
     """
     // openshift.withCluster() {
         // openshift.withProject( stage ) {
