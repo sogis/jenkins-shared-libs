@@ -1,4 +1,4 @@
-def call(String appName, String repo, String stage, String version, List dcConfig, String parameters) {
+def call(String appName, String stage, String version, List dcConfig) {
     openshift.withCluster() {
         openshift.withProject(stage) {
             for  ( o in dcConfig ) {
