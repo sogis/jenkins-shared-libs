@@ -1,4 +1,5 @@
-def call(String appName, String repo, String stage, String version, String parameters) {
+def call(String appName, String repo, String stage, String version, List dcConfig, String parameters) {
+    println dcConfig
     sh """
        oc process -f ${repo}/deploymentconfig.yaml $parameters | oc apply -n $stage -f-
     """
