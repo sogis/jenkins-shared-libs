@@ -6,7 +6,7 @@ def call(String appName, String stage, String version, List dcConfig) {
             //    }
             openshift.apply( dcConfig )
             dc = openshift.selector( "dc/${appName}" )
-            dc.rollout().status()
+            //dc.rollout().status()
             }
         }
     }
