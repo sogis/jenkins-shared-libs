@@ -5,6 +5,7 @@ def call(String appName, String stage, String version, List dcConfig) {
                 o.spec.template.spec.containers[0].image = "docker-registry.default.svc:5000/${stage}/${appName}:${version}"
                 }
             openshift.apply( dcConfig )
+            sleep(2000)
             dc = openshift.selector( "dc/${appName}" )
             dc.rollout().status()
             }
