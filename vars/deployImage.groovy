@@ -1,11 +1,11 @@
 def call(String appName, String stage, String version, List dcConfig) {
     openshift.withCluster() {
         openshift.withProject(stage) {
-            for  ( o in dcConfig ) {
-                o.spec.template.spec.containers[0].image = "docker-registry.default.svc:5000/${stage}/${appName}:${version}"
-                }
-            openshift.apply( dcConfig )
-            sleep(20)
+            //for  ( o in dcConfig ) {
+            //    o.spec.template.spec.containers[0].image = "docker-registry.default.svc:5000/${stage}/${appName}:${version}"
+            //    }
+            //openshift.apply( dcConfig )
+            //sleep(20)
             dc = openshift.selector( "dc/${appName}" )
             dc.rollout().status()
             }
