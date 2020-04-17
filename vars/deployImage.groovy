@@ -6,8 +6,8 @@ def call(String appName, String stage, String version, List dcConfig) {
                 }
             sh """
                 oc process -f https://raw.githubusercontent.com/sogis/pipelines/master/api_webgisclient/data-service/deploymentconfig.yaml -p NAMESPACE=${stage} -p TAG=2.0.16 | oc apply -n $stage -f-
-                oc rollout latest data-service
-                oc rollout status data-service
+                oc rollout latest -n $stage data-service
+                oc rollout status -n $stage data-service
             """
             //dc = openshift.selector( "dc/${appName}" )
             //dc.rollout().latest()
