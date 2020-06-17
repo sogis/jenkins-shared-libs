@@ -1,4 +1,4 @@
-def call() {
+def call(Map params) {
     sh """
         pwd
         mkdir /tmp/workspace/data-service/config
