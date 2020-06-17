@@ -1,5 +1,6 @@
 def call(String appName, String repo, String stage, String params, String configFileName, String arguments) {
     sh """
+       pwd
        if [ -d "qwc_services" ]; then
          rm -rf qwc_services/* rm -rf qwc_services/.git
        fi

@@ -1,5 +1,6 @@
 def call() {
     sh """
+        pwd
         mkdir /tmp/workspace/data-service/config
         mkdir /tmp/workspace/data-service/legends
         chown www-data:www-data /tmp/workspace/data-service/config /tmp/workspace/data-service/legends
