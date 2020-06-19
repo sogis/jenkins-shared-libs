@@ -12,7 +12,7 @@ def call(String appName, String repo, String stage, String params, String config
     sh """
        git config user.email mpfeiffer1975@gmail.com
        git config user.name pfeimich
-       git add $appName/$configFileName
+       git add $appName/$configFileName $appName/permissions.json
        ls -la $appName
        git commit -m 'added file'
     """
