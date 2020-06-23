@@ -1,5 +1,6 @@
 def call(String appName, String repo, String stage, String params, String configFileName, String arguments) {
     sh """
+       pwd
        if [ -d "qwc_services" ]; then
          rm -rf qwc_services/* rm -rf qwc_services/.git
        fi
@@ -11,7 +12,8 @@ def call(String appName, String repo, String stage, String params, String config
     sh """
        git config user.email mpfeiffer1975@gmail.com
        git config user.name pfeimich
-       git add $appName/$configFileName\.json
+       git add $appName/$configFileName $appName/permissions.json
+       ls -la $appName
        git commit -m 'added file'
     """
     }
