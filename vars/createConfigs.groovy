@@ -7,4 +7,5 @@ def call(Map params) {
         cp -R /srv/qwc_service/config /srv/qwc_service/legends $env.WORKSPACE
     """
     stash allowEmpty: true, includes: 'config/**', name: 'configFile'
+    def configs = true
     }
