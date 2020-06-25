@@ -6,5 +6,4 @@ def call(Map params) {
         PGSERVICEFILE=/var/www/.pg_service.conf python3 /srv/qwc_service/config_generator.py /srv/qwc_service/configGeneratorConfig.json service_configs
         cp -R /srv/qwc_service/config /srv/qwc_service/legends $env.WORKSPACE
     """
-    stash allowEmpty: true, includes: 'config/**', name: 'configFile'
     }
