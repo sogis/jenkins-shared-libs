@@ -5,7 +5,7 @@ def call(String appName, String repo, String stage, String params, String config
          rm -rf qwc_services/* rm -rf qwc_services/.git
        fi
        git clone https://github.com/sogis/qwc_services.git
-       wget '$JENKINS_URL/job/$JOB_NAME/$BUILD_NUMBER/artifact/config/default' --no-check-certificate
+       wget --no-check-certificate --auth-no-challenge --user='$apiUser' --password='$PwdApiUser'  '$JENKINS_URL/job/$JOB_NAME/$BUILD_NUMBER/artifact/config/default'
        cp default/* qwc_services/$appName
     """
     dir("qwc_services") {
