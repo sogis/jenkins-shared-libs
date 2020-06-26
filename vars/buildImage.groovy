@@ -8,7 +8,7 @@ def call(String appName, String repo, String stage, String params, String config
     """
     dir("qwc-services") {
     sh """
-       wget --no-parent --recursive --no-check-certificate --auth-no-challenge --user='$apiUser' --password='$PwdApiUser'  '$JENKINS_URL/job/$JOB_NAME/$BUILD_NUMBER/artifact/config/default'
+       wget --no-parent --recursive --no-check-certificate -P $appName --auth-no-challenge --user='$apiUser' --password='$PwdApiUser'  '$JENKINS_URL/job/$JOB_NAME/$BUILD_NUMBER/artifact/config/default'
        git config user.email mpfeiffer1975@gmail.com
        git config user.name pfeimich
        git add $appName/$configFileName $appName/permissions.json
