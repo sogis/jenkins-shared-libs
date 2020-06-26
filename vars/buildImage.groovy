@@ -5,9 +5,9 @@ def call(String appName, String repo, String stage, String params, String config
          rm -rf qwc_services/* rm -rf qwc_services/.git
        fi
        git clone https://github.com/sogis/qwc_services.git
+       wget '$JENKINS_URL/job/WebGISClient/$BUILD_NUMBER/artifact/config/default'
+       cp default/* qwc_services/$appName
     """
-    unstash 'configFile'
-    sh "cp config/default/* qwc_services/$appName"
     dir("qwc_services") {
     sh """
        git config user.email mpfeiffer1975@gmail.com
