@@ -6,7 +6,7 @@ def call(String appName, String repo, String stage, String params, String config
        fi
        git clone https://github.com/sogis/qwc_services.git
     """
-    dir("qwc-services") {
+    dir("qwc_services") {
     sh """
        ls -la
        wget -r -np -nd -erobots=off -A '*.json' --reject-regex '/\\*.+\\*/|auto_refresh' --no-check-certificate --auth-no-challenge --user='$apiUser' --password='$PwdApiUser'  '$JENKINS_URL/job/$JOB_NAME/$BUILD_NUMBER/artifact/config/default/' -P $appName
