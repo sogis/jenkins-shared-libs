@@ -1,4 +1,4 @@
-def call(String appName, String repo, String stage, String params, String configFileName, String buildNumber, String arguments) {
+def call(String appName, String repo, String stage, String params, String configFileName, String jobName, String buildNumber, String arguments) {
     sh """
        pwd
        if [ -d "qwc_services" ]; then
@@ -9,7 +9,7 @@ def call(String appName, String repo, String stage, String params, String config
     dir("qwc_services") {
     sh """
        ls -la
-       wget -r -np -nd -erobots=off -A '*.json' --reject-regex '/\\*.+\\*/|auto_refresh' --no-check-certificate --auth-no-challenge --user='$apiUser' --password='$PwdApiUser'  '$JENKINS_URL/job/$JOB_NAME/$buildNumber/artifact/config/default/' -P $appName
+       wget -r -np -nd -erobots=off -A '*.json' --reject-regex '/\\*.+\\*/|auto_refresh' --no-check-certificate --auth-no-challenge --user='$apiUser' --password='$PwdApiUser'  '$JENKINS_URL/job/$jobName/$buildNumber/artifact/config/default/' -P $appName
        ls -la data-service
        git config user.email mpfeiffer1975@gmail.com
        git config user.name pfeimich
