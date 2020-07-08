@@ -7,8 +7,14 @@ def call(String appName, String repo, String stage, String params, String config
        git clone https://github.com/sogis/qwc_services.git
     """
     dir("qwc_services") {
+    if ( appName == "qwc-service" ) {
+       if ( repo == "gdi" ) {
+          sh """
+             sed -i "s|geo-i.so.ch\/analytics|geo.so.ch\/analytics|" $appName/index.html
+          """
+          }
+       }
     sh """
-       ls -la
        wget -r -np -nd -erobots=off -A '*.json' --reject-regex '/\\*.+\\*/|auto_refresh' --no-check-certificate --auth-no-challenge --user='$apiUser' --password='$PwdApiUser'  '$JENKINS_URL/job/$jobName/$buildNumber/artifact/config/default/' -P $appName
        ls -la data-service
        git config user.email mpfeiffer1975@gmail.com
