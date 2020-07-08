@@ -10,7 +10,7 @@ def call(String appName, String repo, String stage, String params, String config
     if ( appName == "qwc-service" ) {
        if ( repo == "gdi" ) {
           sh """
-             sed -i "s|geo-i.so.ch\/analytics|geo.so.ch\/analytics|" $appName/index.html
+             sed -i "s|geo-i.so.ch/analytics|geo.so.ch/analytics|" $appName/index.html
           """
           }
        }
