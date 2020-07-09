@@ -19,6 +19,7 @@ def call(String appName, String repo, String stage, String params, String config
           }
        sh """
           git add $appName/index.html
+          git commit -m 'added index.html'
        """
        }
     sh """
