@@ -8,20 +8,24 @@ def call(String appName, String repo, String stage, String params, String config
     """
     dir("qwc_services") {
     if ( appName == "qwc-service" ) {
+       sh """ 
+          git config user.email agi.info@bd.so.ch
+          git config user.name agiuser
+       """
        if ( repo == "gdi" ) {
           sh """
              sed -i "s|geo-i.so.ch/analytics|geo.so.ch/analytics|" $appName/index.html
+             git add $appName/index.html
           """
           }
        }
     sh """
        wget -r -np -nd -erobots=off -A '*.json' --reject-regex '/\\*.+\\*/|auto_refresh' --no-check-certificate --auth-no-challenge --user='$apiUser' --password='$PwdApiUser'  '$JENKINS_URL/job/$jobName/$buildNumber/artifact/config/default/' -P $appName
        ls -la data-service
-       git config user.email mpfeiffer1975@gmail.com
-       git config user.name pfeimich
+
        git add $appName/$configFileName $appName/permissions.json
        ls -la $appName
-       git commit -m 'added file'
+       git commit -m 'added files'
     """
     }
     sh """   
