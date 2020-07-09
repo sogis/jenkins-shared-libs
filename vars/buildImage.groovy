@@ -5,10 +5,12 @@ def call(String appName, String repo, String stage, String params, String config
          rm -rf qwc_services/* rm -rf qwc_services/.git
        fi
        git clone https://github.com/sogis/qwc_services.git
+    """
+    dir("qwc_services") {
+    sh """
        git config user.email agi.info@bd.so.ch
        git config user.name agiuser
     """
-    dir("qwc_services") {
     if ( appName == "qwc-service" ) {
        if ( repo == "gdi" ) {
           sh """
