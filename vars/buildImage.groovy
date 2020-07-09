@@ -15,12 +15,9 @@ def call(String appName, String repo, String stage, String params, String config
        if ( repo == "gdi" ) {
           sh """
              sed -i "s|geo-i.so.ch/analytics|geo.so.ch/analytics|" $appName/index.html
+             git add $appName/index.html
           """
           }
-       sh """
-          git add $appName/index.html
-          git commit -m 'added index.html'
-       """
        }
     sh """
        wget -r -np -nd -erobots=off -A '*.json' --reject-regex '/\\*.+\\*/|auto_refresh' --no-check-certificate --auth-no-challenge --user='$apiUser' --password='$PwdApiUser'  '$JENKINS_URL/job/$jobName/$buildNumber/artifact/config/default/' -P $appName
