@@ -11,6 +11,6 @@ def call(Map params) {
     stash name: 'requirements', includes: 'requirements/**'
     archiveArtifacts artifacts: 'config/**', onlyIfSuccessful: true, allowEmptyArchive: true
     sh """
-        rm -rf $env.WORKSPACE/legends $env.WORKSPACE/config
+        rm -rf $env.WORKSPACE/legends $env.WORKSPACE/config $env.WORKSPACE/requirements
     """
     }
