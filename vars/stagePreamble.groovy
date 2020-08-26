@@ -5,9 +5,8 @@ def call(){
         message: 'Bitte Versionen angeben und ob das Image gebaut werden soll',
         ok: 'Start Pipeline',
         parameters: [
-            string(defaultValue: '2.0.8',
-                   description: 'Bitte Basis Image Version auswählen',
-                   name: 'vBaseImage'),
+            file(description: 'Bitte requirements.txt hochladen',
+                 name: 'requirements.txt'),
             string(description: 'Bitte Tag des generierten bzw. deployten Images angeben',
                    name: 'vDeployImage'),
             string(defaultValue: "gdi-test",
