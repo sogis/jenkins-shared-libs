@@ -6,7 +6,7 @@ def call(){
         ok: 'Start Pipeline',
         parameters: [
             file(description: 'Bitte requirements.txt hochladen',
-                 name: 'requirements/uploadFile'),
+                 name: 'requirements.txt'),
             string(description: 'Bitte Tag des generierten bzw. deployten Images angeben',
                    name: 'vDeployImage'),
             string(defaultValue: "gdi-test",
