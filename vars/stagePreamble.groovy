@@ -7,8 +7,6 @@ def call(){
         parameters: [
             file(description: 'Bitte requirements.txt hochladen',
                  name: 'requirements.txt'),
-            string(description: 'Bitte Tag des generierten bzw. deployten Images angeben',
-                   name: 'vDeployImage'),
             string(defaultValue: "gdi-test",
                    description: 'Bitte Namespace auswählen',
                    name: 'namespace'),
