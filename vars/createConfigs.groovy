@@ -6,4 +6,7 @@ def call(Map params) {
         mv /srv/qwc_service/config /srv/qwc_service/legends $env.WORKSPACE
     """
     archiveArtifacts artifacts: 'config/**', onlyIfSuccessful: true, allowEmptyArchive: true
+    sh """
+        rm -rf $env.WORKSPACE/legends $env.WORKSPACE/config
+    """
     }
