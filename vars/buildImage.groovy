@@ -19,8 +19,17 @@ def call(String appName, String repo, String stage, String params, String config
           """
           }
        }
+    if ( appName == "qgis-server" ) {
+       filetypes = '*.qgs'
+       }
+    else if ( appName == "legend-service" ) {
+       filetypes = '*.json, *.png'
+       }
+    else {
+       filetypes = '*.json'
+       }
     sh """
-       wget -r -np -nd -erobots=off -A '*.json' --reject-regex '/\\*.+\\*/|auto_refresh' --no-check-certificate --auth-no-challenge --user='$apiUser' --password='$PwdApiUser'  '$JENKINS_URL/job/$jobName/$buildNumber/artifact/config/default/' -P $appName
+       wget -r -np -nd -erobots=off -A '$filetypes' --reject-regex '/\\*.+\\*/|auto_refresh' --no-check-certificate --auth-no-challenge --user='$apiUser' --password='$PwdApiUser'  '$JENKINS_URL/job/$jobName/$buildNumber/artifact/config/default/' -P $appName
        ls -la data-service
 
        git add $appName/$configFileName $appName/permissions.json
