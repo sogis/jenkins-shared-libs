@@ -21,18 +21,21 @@ def call(String appName, String repo, String stage, String params, String config
        }
     if ( appName == "qgis-server" ) {
        filetypes = '*.qgs'
+       gitAddFiles = appName + '/' + $configFileName + ' ' + appName + '/somap_wfs.qgs ' + appName + '/somap_print.qgs'
        }
     else if ( appName == "legend-service" ) {
        filetypes = '*.json, *.png'
+       gitAddFiles = appName + '/' + configFileName + ' ' + appName + '/permissions.json ' + appName + '/*.png'
        }
     else {
        filetypes = '*.json'
+       gitAddFiles = appName + '/' + configFileName + ' ' + appName + '/permissions.json
        }
     sh """
        wget -r -np -nd -erobots=off -A '$filetypes' --reject-regex '/\\*.+\\*/|auto_refresh' --no-check-certificate --auth-no-challenge --user='$apiUser' --password='$PwdApiUser'  '$JENKINS_URL/job/$jobName/$buildNumber/artifact/config/default/' -P $appName
        ls -la data-service
 
-       git add $appName/$configFileName $appName/permissions.json
+       git add $gitAddFiles
        ls -la $appName
        git commit -m 'added files'
     """
