@@ -21,7 +21,7 @@ def call(String appName, String repo, String stage, String params, String config
        }
     if ( appName == "qgis-server" ) {
        filetypes = '*.qgs'
-       gitAddFiles = appName + '/' + $configFileName + ' ' + appName + '/somap_wfs.qgs ' + appName + '/somap_print.qgs'
+       gitAddFiles = appName + '/' + configFileName + ' ' + appName + '/somap_wfs.qgs ' + appName + '/somap_print.qgs'
        }
     else if ( appName == "legend-service" ) {
        filetypes = '*.json, *.png'
