@@ -6,7 +6,7 @@ def call(){
         ok: 'Start Pipeline',
         parameters: [
             file(description: 'Bitte requirements.txt hochladen',
-                 name: 'requirements.txt'),
+                 name: 'requirements'),
             string(defaultValue: "gdi-test",
                    description: 'Bitte Namespace auswählen',
                    name: 'namespace'),
