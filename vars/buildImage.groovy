@@ -43,5 +43,6 @@ def call(String appName, String repo, String stage, String params, String config
     sh """   
        oc process -f $repo/buildconfig.yaml $params | oc apply -n $stage -f- 
        oc start-build $appName -n $stage --from-repo=qwc_services --wait $arguments
+       rm -rf qwc_services/* rm -rf qwc_services/.git
     """
     }
