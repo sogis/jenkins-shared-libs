@@ -21,7 +21,7 @@ Eigene Klassen werden im *src* Ordner erstellt. Eigene Variablen im *vars* Ordne
 
 Weitere Infos unter https://www.jenkins.io/doc/book/pipeline/shared-libraries/
 
-Am komfortabelsten für die Verwendung in Jenkins Pipelines ist die Verwendung von Variablen. Im 
+Am komfortabelsten für die Verwendung in Jenkins Pipelines ist die Verwendung von Variablen. 
 
 ## Einbindung der Shared Library in Jenkins Pipeline
 Es gibt verschiedene Methoden Shared Libraries in die Pipeline einzubinden.
