@@ -1,5 +1,5 @@
 # jenkins-shared-libs
-AGI Shared libraries zur Benutzung in AGI Jenkins
+AGI Shared Libraries zur Benutzung in AGI Jenkins
 
 ## Erstellen eigener Variablen und Klassen
 Die Ordnerstruktur der Shared Library muss folgendermassen aufgebaut sein:
@@ -17,11 +17,11 @@ Die Ordnerstruktur der Shared Library muss folgendermassen aufgebaut sein:
 |       +- foo
 |           +- bar.json    # static helper data for org.foo.Bar
 ```
-Eigene Variablen werden im *src* Ordner erstellt. Eigene Variblen im *vars* Ordner.
+Eigene Klassen werden im *src* Ordner erstellt. Eigene Variablen im *vars* Ordner.
 
 Weitere Infos unter https://www.jenkins.io/doc/book/pipeline/shared-libraries/
 
-Am komfortabelsten für die Verwendung in Jenkins Pipelines ist die Verwendung von Variablen. 
+Am komfortabelsten für die Verwendung in Jenkins Pipelines ist die Verwendung von Variablen. Im 
 
 ## Einbindung der Shared Library in Jenkins Pipeline
 Es gibt verschiedene Methoden Shared Libraries in die Pipeline einzubinden.
@@ -42,7 +42,7 @@ pipeline {
         }
     }
 ```
-Die AGI Shared Library muss hier bereits vor dem pipeline Block eingebunden werden.
+Die AGI Shared Library muss hier bereits vor dem *pipeline* Block eingebunden werden.
 
 Die definierte Variable (im Beispiel *deployImage*) wird dann einfach mit den notwendigen Parametern aufgerufen. Bei dieser Variante muss die Shared Library nicht global in Jenkins definiert werden.
 
@@ -67,7 +67,9 @@ Dieser Schritt ist nur bei Variante B erforderlich.
 ![](https://github.com/sogis/jenkins-shared-libs/blob/master/defineGlobalPipelineLib.png)
 
 1 Name der Shared Library
+
 2 Standardmässig verwendete Version, wenn beim Einbinden der Lib keine angegeben wird.
+
 3 Pfad zum Repository
 ## Weitere Infos
 
