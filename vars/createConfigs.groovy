@@ -1,6 +1,6 @@
 def call(String appName, String namespace, String configFileName) {
     sh "echo $configFileName"
-    configMapName = sh "echo $configFileName | sed s/./-/g"
+    configMapName = sh "echo $configFileName | sed 's/\./-/g'"
     sh """
         mkdir /srv/qwc_service/config
         mkdir /srv/qwc_service/legends
