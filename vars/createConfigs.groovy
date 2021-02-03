@@ -3,8 +3,8 @@ def call(String appName, String namespace, String configFileName) {
     //def configMapNameTmp = sh "echo $configFileName | sed 's/\\./-/g'"
     //def configMapName = sh "echo $configMapNameTmp | tr '[:upper:]' '[:lower:]'"
     sh """
-        configMapNameTmp=$(echo $configFileName | sed 's/\\./-/g')
-        configMapName=$(echo $configMapNameTmp | tr '[:upper:]' '[:lower:]')
+        configMapNameTmp=\$(echo \$configFileName | sed 's/\\./-/g')
+        configMapName=\$(echo \$configMapNameTmp | tr '[:upper:]' '[:lower:]')
         mkdir /srv/qwc_service/config
         mkdir /srv/qwc_service/legends
         PGSERVICEFILE=/var/www/pg_service.conf python3 /srv/qwc_service/config_generator.py /srv/qwc_service/configGeneratorConfig.json all
