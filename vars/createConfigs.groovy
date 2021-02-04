@@ -1,4 +1,4 @@
-def call(String appName, String namespace, String configFileName) {
+def call(Map params) {
     sh """
         mkdir /srv/qwc_service/config
         mkdir /srv/qwc_service/legends
