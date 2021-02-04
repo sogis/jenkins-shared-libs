@@ -1,6 +1,6 @@
 def call(String appName, String namespace, String configFileName) {
-    sh "configFileName=$configFileName"
-    configMapName = sh(returnStdout: true, script: 'echo $configFileName | sed "s/\\./-/g" | tr "[:upper:]" "[:lower:]"').trim()
+    //sh "configFileName=$configFileName"
+    configMapName = sh(returnStdout: true, script: 'echo \$configFileName | sed "s/\\./-/g" | tr "[:upper:]" "[:lower:]"').trim()
     sh "echo $configMapName"
     //configMapNameTmp = sh(returnStdout: true, script: 'echo $configFileName | sed "s/\\./-/g"').trim()
     //configMapName = sh(returnStdout: true, script: 'echo $configMapNameTmp | .trim()
