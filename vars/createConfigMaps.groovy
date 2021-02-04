@@ -3,4 +3,5 @@ def call(String appName, String namespace, String configFileName, String jobName
     sh """
         wget -r -np -nd -erobots=off -A *.json --reject-regex '/\\*.+\\*/|auto_refresh' --no-check-certificate --auth-no-challenge --user='$apiUser' --password='$PwdApiUser'  '$JENKINS_URL/job/$jobName/$buildNumber/artifact/config/default/'
         oc create configmap $configMapName --from-file $configFileName --from-file permissions.json --dry-run -o yaml | oc replace --force -n $namespace -f -
+    """
     }
