@@ -1,9 +1,9 @@
 def call(String appName, String namespace, String configFileName) {
     sh "echo $configFileName"
-    configMapNameTmp = sh """ echo $configFileName | sed 's/\\./-/g'"""
-    sh "echo $configMapNameTmp"
+    configMapName = sh """ echo $configFileName | sed 's/\\./-/g | tr '[:upper:]' '[:lower:]'"""
+    sh "echo $configMapName"
     //configMapNameTmp = sh(returnStdout: true, script: 'echo $configFileName | sed "s/\\./-/g"').trim()
-    configMapName = sh(returnStdout: true, script: 'echo $configMapNameTmp | tr "[:upper:]" "[:lower:]"').trim()
+    //configMapName = sh(returnStdout: true, script: 'echo $configMapNameTmp | .trim()
     sh """
         mkdir /srv/qwc_service/config
         mkdir /srv/qwc_service/legends
