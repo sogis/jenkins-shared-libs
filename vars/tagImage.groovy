@@ -11,6 +11,7 @@ def call(String baseImage, String appName, String vBaseImage, String vDeployImag
             if ( dcImage != vDeployImage ) { 
                 sh """
                     oc tag -n $namespace --source=docker $baseImage:$vBaseImage $appName:$vDeployImage
+                    sleep 2
                     oc tag -n $namespace --source=imagestreamtag $appName:$vDeployImage $appName:latest
                 """
             }
