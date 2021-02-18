@@ -8,9 +8,11 @@ def call(String baseImage, String appName, String vBaseImage, String vDeployImag
             else {
                 dcImage = ''
             }
-            if ( dcImage != version ) { 
-                openshift.tag( "${baseImage}:${vBaseImage}", "${appName}:${vDeployImage}")
-                openshift.tag( "${appname}:${vDeployImage}", "${appName}:latest")
+            if ( dcImage != vDeployImage ) { 
+                sh """
+                    oc tag -n $namespace --source=docker $baseImage:$vBaseImage $appName:$vDeployImage
+                    oc tag -n $namespace --source=imagestreamtag $appName:$vDeployImage $appName:latest
+                """
             }
             else {
                 println "No new tag for ${appName} Image because tag already exists"
