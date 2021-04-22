@@ -12,7 +12,7 @@ def call(String appName, String repo, String stage, String params, String config
        git config user.name agiuser
     """
     if ( appName == "qwc-service" ) {
-       if ( repo == "gdi-production" ) {
+       if ( stage == "gdi-production" ) {
           sh """
              sed -i "s|geo-i.so.ch/analytics|geo.so.ch/analytics|" $appName/index.html
              git add $appName/index.html
