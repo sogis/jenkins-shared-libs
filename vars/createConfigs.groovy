@@ -1,13 +1,15 @@
-def call(String environment) {
+def call(String environment, String dbuser,String dbuserpwd, String dbserver, String dbname ) {
     sh """
-        mkdir /srv/qwc_service/config
-        mkdir /srv/qwc_service/legends
-        PGSERVICEFILE=/var/www/${environment}/pg_service-${environment}.conf python3 /srv/qwc_service/config_generator.py /srv/qwc_service/configGeneratorConfig.json all
-        PGSERVICEFILE=/var/www/${environment}/pg_service-${environment}.conf python3 /srv/qwc_service/config_generator.py /srv/qwc_service/configGeneratorConfig.json qgs
-        mv /srv/qwc_service/config /srv/qwc_service/legends $env.WORKSPACE
+        if [ -d "sql2json" ]; then
+          rm -rf sql2json/* rm -rf sql2json/.git
+        fi
+        git clone https://github.com/simi-so/sql2json.git
+        chmod u+x sql2json/sql2json.jar
+        sql2json/sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t sql2json/testconfigs/dataConfig.json -o dataConfig.json
+        mkdir config
     """
     archiveArtifacts artifacts: 'config/**', onlyIfSuccessful: true, allowEmptyArchive: true
     sh """
-        rm -rf $env.WORKSPACE/legends $env.WORKSPACE/config
+        rm -rf $env.WORKSPACE/config
     """
     }
