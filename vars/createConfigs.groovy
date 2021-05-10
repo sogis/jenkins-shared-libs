@@ -11,7 +11,7 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
         chmod u+x sql2json-1.1.20.jar
         java -jar sql2json-1.1.20.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t sql2json/testconfigs/legendConfig.json -o legendConfig.json -s https://raw.githubusercontent.com/qwc-services/qwc-legend-service/master/schemas/qwc-legend-service.json
         mkdir config
-        mv legendConfig.json permissions.json config
+        mv legendConfig.json sql2json/testconfigs/permissions.json config
     """
     archiveArtifacts artifacts: 'config/**', onlyIfSuccessful: true, allowEmptyArchive: true
     sh """
