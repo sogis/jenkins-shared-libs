@@ -1,6 +1,6 @@
 def call(String environment, String dbuser,String dbuserpwd, String dbserver, String dbname, String configFileName, String serviceName, String schemaDirName = "") {
     if ( serviceName == "auth-service" ) {
-        schemaDir = 'qwc-' + schemaDirName
+        schemaDir = schemaDirName
         }
     else {
         schemaDir = 'qwc-' + serviceName
