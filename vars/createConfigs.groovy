@@ -1,4 +1,4 @@
-def call(String environment, String dbuser,String dbuserpwd, String dbserver, String dbname, String configFileName, String serviceName, String schemaDirName) {
+def call(String environment, String dbuser,String dbuserpwd, String dbserver, String dbname, String configFileName, String serviceName, String schemaDirName = "") {
     sh """
         if [ -d "sql2json" ]; then
           rm -rf sql2json/* rm -rf sql2json/.git
