@@ -9,7 +9,7 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
         if [ -d "sql2json" ]; then
           rm -rf sql2json/* rm -rf sql2json/.git
         fi
-        if [ -L "/qgs-resources/config/${serviceName}" ]; then
+        if [ ! -d  "/qgs-resources/config/${serviceName}" ]; then
           mkdir /qgs-resources/config/${serviceName}
         fi
         pwd
