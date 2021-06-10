@@ -10,7 +10,7 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
           rm -rf sql2json/* rm -rf sql2json/.git
         fi
         if [ ! -d  "/qgs-resources/config/${serviceName}" ]; then
-          mkdir /qgs-resources/config/${serviceName}
+          mkdir -p /qgs-resources/config/${serviceName}
         fi
         pwd
         ls -la
