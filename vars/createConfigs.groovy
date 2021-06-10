@@ -18,8 +18,8 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
         ls -la
         chmod u+x sql2json.jar
         java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t api_webgisclient/sql2json/templates/${serviceName}/${configFileName} -o /qgs-resources/config/${serviceName}/${configFileName} -s https://raw.githubusercontent.com/qwc-services/${schemaDir}/master/schemas/${mapping}-${serviceName}.json
-        //mkdir config
-        //mv ${configFileName} api_webgisclient/sql2json/templates/permissions.json config
+        # mkdir config
+        # mv ${configFileName} api_webgisclient/sql2json/templates/permissions.json config
     """
     archiveArtifacts artifacts: 'config/**', onlyIfSuccessful: true, allowEmptyArchive: true
     sh """
