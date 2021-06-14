@@ -9,16 +9,16 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
         if [ -d "sql2json" ]; then
           rm -rf sql2json/* rm -rf sql2json/.git
         fi
-        // get the sql2json.jar and set the necessary permissions
+        # get the sql2json.jar and set the necessary permissions
         wget https://github.com/simi-so/sql2json/releases/latest/download/sql2json.jar
         chmod u+x sql2json.jar
 
-        // create config dir
+        # create config dir
         mkdir config
-        // sql2json command to create the config file
+        # sql2json command to create the config file
         java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t api_webgisclient/sql2json/templates/${serviceName}/${configFileName} -o config/${configFileName} -s https://raw.githubusercontent.com/qwc-services/${schemaDir}/master/schemas/${mapping}-${serviceName}.json
         
-        // grep for qgis-server pod name
+        # grep for qgis-server pod name
         ls -la
     """
         PODNAME= sh([script: 'oc get pods -o custom-columns=POD:.metadata.name --no-headers -n ${namespace} | grep qgis-server | grep -v -E -m 1 "featureinfo|build|print"', returnStdout: true]).trim()
