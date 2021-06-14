@@ -9,6 +9,11 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
         if [ -d "sql2json" ]; then
           rm -rf sql2json/* rm -rf sql2json/.git
         fi
+
+        if [ ! -d  "/qgs-resources/config/${serviceName}" ]; then
+          mkdir -p /qgs-resources/config/${serviceName}
+        fi
+
         # get the sql2json.jar and set the necessary permissions
         wget https://github.com/simi-so/sql2json/releases/latest/download/sql2json.jar
         chmod u+x sql2json.jar
