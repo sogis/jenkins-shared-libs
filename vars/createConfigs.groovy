@@ -16,14 +16,14 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
         # create config dir
         mkdir config
         # sql2json command to create the config file
-        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t api_webgisclient/sql2json/templates/${serviceName}/${configFileName} -o config/${configFileName} -s https://raw.githubusercontent.com/qwc-services/${schemaDir}/master/schemas/${mapping}-${serviceName}.json
+        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t api_webgisclient/sql2json/templates/${serviceName}/${configFileName} -o config/${serviceName}/${configFileName} -s https://raw.githubusercontent.com/qwc-services/${schemaDir}/master/schemas/${mapping}-${serviceName}.json
         
         # grep for qgis-server pod name
         ls -la
     """
         PODNAME= sh([script: 'oc get pods -o custom-columns=POD:.metadata.name --no-headers -n ${namespace} | grep qgis-server | grep -v -E -m 1 "featureinfo|build|print"', returnStdout: true]).trim()
     sh """
-        oc rsync config/ $PODNAME
+        oc rsync config/ $PODNAME:/data/config
         cp api_webgisclient/sql2json/templates/permissions.json config
     """
     archiveArtifacts artifacts: 'config/**', onlyIfSuccessful: true, allowEmptyArchive: true
