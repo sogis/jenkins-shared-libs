@@ -26,8 +26,8 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
     """
         PODNAME= sh([script: 'oc get pods -o custom-columns=POD:.metadata.name --no-headers -n ${namespace} | grep qgis-server | grep -v -E -m 1 "featureinfo|build|print"', returnStdout: true]).trim()
     sh """
-        oc rsync -n ${namespace} config/ $PODNAME:/data/config
         cp api_webgisclient/sql2json/templates/permissions.json config
+        oc rsync -n ${namespace} config/ $PODNAME:/data/config
     """
     archiveArtifacts artifacts: 'config/**', onlyIfSuccessful: true, allowEmptyArchive: true
     sh """
