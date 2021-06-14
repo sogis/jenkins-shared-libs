@@ -10,8 +10,8 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
           rm -rf sql2json/* rm -rf sql2json/.git
         fi
 
-        if [ ! -d  "/qgs-resources/config/${serviceName}" ]; then
-          mkdir -p /qgs-resources/config/${serviceName}
+        if [ ! -d  "config/${serviceName}" ]; then
+          mkdir -p config/${serviceName}
         fi
 
         # get the sql2json.jar and set the necessary permissions
