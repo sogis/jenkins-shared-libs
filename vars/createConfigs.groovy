@@ -1,5 +1,5 @@
 def call(String environment, String dbuser,String dbuserpwd, String dbserver, String dbname, String configFileName, String serviceName, String mapping, String schemaDirName = "") {
-    if ( serviceName == "saml-auth" ) {
+    if ( schemaDirName != "" ) {
         schemaDir = schemaDirName
         }
     else {
