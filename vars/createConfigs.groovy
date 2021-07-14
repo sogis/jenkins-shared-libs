@@ -19,7 +19,7 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
         chmod u+x sql2json.jar
 
         # sql2json command to create the config file
-        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t api_webgisclient/sql2json/templates/${serviceName}/${configFileName} -o config/default/${configFileName} -s https://raw.githubusercontent.com/qwc-services/${schemaDir}/master/schemas/${mapping}-${serviceName}.json
+        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t api_webgisclient/sql2json/templates/${serviceName}/template.json -o config/default/${configFileName} -s https://raw.githubusercontent.com/qwc-services/${schemaDir}/master/schemas/${mapping}-${serviceName}.json
         
         # grep for qgis-server pod name
         ls -la
