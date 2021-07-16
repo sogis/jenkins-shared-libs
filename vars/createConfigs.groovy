@@ -11,7 +11,7 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
         }
     else {
         targetPath = '/data/config'
-        githubRepo = 'qwc-services
+        githubRepo = 'qwc-services'
         }
     sh """ 
         if [ -d "sql2json" ]; then
