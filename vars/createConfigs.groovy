@@ -5,7 +5,7 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
     else {
         schemaDir = mapping + '-' + serviceName
         } 
-    if ( serviceName == "wms-qgs-content" || serviceName == "wfs-qgs-content" ) {
+    if ( serviceName == "wms-qgs-content" || serviceName == "wfs-qgs-content" || serviceName == "print-qgs-content" ) {
         targetPath = '/data'
         githubRepo = 'simi-so'
         }
@@ -30,7 +30,6 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
         java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t api_webgisclient/sql2json/templates/${serviceName}/template.json -o config/default/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${serviceName}.json
         
         # grep for qgis-server pod name
-        ls -la
     """
         PODNAME= sh([script: 'oc get pods -o custom-columns=POD:.metadata.name --no-headers -n ${namespace} | grep qgis-server | grep -v -E -m 1 "featureinfo|build|print"', returnStdout: true]).trim()
     sh """
