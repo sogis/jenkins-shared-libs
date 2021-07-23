@@ -18,17 +18,15 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
           rm -rf sql2json/* rm -rf sql2json/.git
         fi
         
-        if [-d "sql2json.jar" ]; then
-          rm sql2json.jar
-        fi
-
         if [ ! -d  "config/default" ]; then
           mkdir -p config/default
         fi
 
-        # get the sql2json.jar and set the necessary permissions
-        wget https://github.com/simi-so/sql2json/releases/latest/download/sql2json.jar
-        chmod u+x sql2json.jar
+        # if not exists get the sql2json.jar and set the necessary permissions
+        if [ ! -d "sql2json.jar" ]; then
+          wget https://github.com/simi-so/sql2json/releases/latest/download/sql2json.jar
+          chmod u+x sql2json.jar
+        fi
 
         # sql2json command to create the config file
         java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t api_webgisclient/sql2json/templates/${serviceName}/template.json -o config/default/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${serviceName}.json
