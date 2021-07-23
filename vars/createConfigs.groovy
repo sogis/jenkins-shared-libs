@@ -17,6 +17,10 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
         if [ -d "sql2json" ]; then
           rm -rf sql2json/* rm -rf sql2json/.git
         fi
+        
+        if [-d "sql2json.jar" ]; then
+          rm sql2json.jar
+        fi
 
         if [ ! -d  "config/default" ]; then
           mkdir -p config/default
