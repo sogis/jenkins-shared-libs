@@ -18,8 +18,10 @@ def call(String appName, String repo, String stage, String params, String config
              git add $appName/index.html
           """
           }
+       filetypes = '*.json'
+       gitAddFiles = appName + '/' + configFileName
        }
-    if ( appName == "qgis-server" ) {
+    else if ( appName == "qgis-server" ) {
        filetypes = '*.qgs'
        gitAddFiles = appName + '/' + configFileName + ' ' + appName + '/somap_wfs.qgs ' + appName + '/somap_print.qgs'
        }
