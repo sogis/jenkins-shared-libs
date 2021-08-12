@@ -22,7 +22,7 @@ def call(String appName, String repo, String stage, String params, String config
        gitAddFiles = appName + '/' + configFileName
        }
     else if ( appName == "qgis-server" ) {
-       filetypes = '*.qgs'
+       filetypes = '*.qgs, *.svg'
        gitAddFiles = appName + '/' + configFileName + ' ' + appName + '/somap_wfs.qgs ' + appName + '/somap_print.qgs'
        }
     else if ( appName == "legend-service" ) {
