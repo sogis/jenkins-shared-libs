@@ -37,6 +37,11 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
     sh """
         oc rsync -n ${namespace} config/ $PODNAME:${targetPath}
     """
+    if ( serviceName == "wms-qgs-content" ) {
+        sh """
+           cp api_webgisclient/qgis-server/grundbuchplanauszug.qgs config/default
+        """
+        }
     archiveArtifacts artifacts: 'config/**', onlyIfSuccessful: true, allowEmptyArchive: true
     sh """
         rm -rf $env.WORKSPACE/config
