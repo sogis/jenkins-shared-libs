@@ -38,6 +38,14 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
            cp -R api_webgisclient/landreg-service/grundbuchplanauszug.qgs api_webgisclient/landreg-service/print config
         """
         }
+    else if ( serviceName == "qwc-service" ) {
+        if ( environment == "gdi-production" ) {
+            sh """
+                sed -i "s|geo-i.so.ch/analytics|geo.so.ch/analytics|" api_webgisclient/qwc-service/index.html
+                cp -R api_webgisclient/qwc-service/index.html config/default
+            """
+            }
+        }
     PODNAME= sh([script: 'oc get pods -o custom-columns=POD:.metadata.name --no-headers -n ${namespace} | grep qgis-server | grep -v -E -m 1 "featureinfo|build|print"', returnStdout: true]).trim()
     sh """
         oc rsync -n ${namespace} config/ $PODNAME:${targetPath}
