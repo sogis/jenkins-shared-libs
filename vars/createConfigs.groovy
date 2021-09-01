@@ -35,7 +35,7 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
     """
     if ( serviceName == "wms-qgs-content" ) {
         sh """
-           cp api_webgisclient/landreg-service/grundbuchplanauszug.qgs api_webgisclient/landreg-service/*.svg config
+           cp -R api_webgisclient/landreg-service/grundbuchplanauszug.qgs api_webgisclient/landreg-service/print config
         """
         }
     PODNAME= sh([script: 'oc get pods -o custom-columns=POD:.metadata.name --no-headers -n ${namespace} | grep qgis-server | grep -v -E -m 1 "featureinfo|build|print"', returnStdout: true]).trim()
