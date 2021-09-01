@@ -35,7 +35,7 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
     """
     if ( serviceName == "wms-qgs-content" ) {
         sh """
-           cp -R api_webgisclient/$serviceName/grundbuchplanauszug.qgs api_webgisclient/$serviceName/print config
+           cp -R api_webgisclient/landreg-service/grundbuchplanauszug.qgs api_webgisclient/landreg-service/print config
         """
         }
     else if ( serviceName == "qwc-service" ) {
