@@ -4,7 +4,7 @@ def call(String appName, String repo, String stage, String params, String config
        if [ -d "qwc_services" ]; then
          rm -rf qwc_services/* rm -rf qwc_services/.git
        fi
-       git clone https://github.com/sogis/qwc_services.git -b simi-branch
+       git clone https://github.com/sogis/qwc_services.git
     """
     dir("qwc_services") {
        sh """
