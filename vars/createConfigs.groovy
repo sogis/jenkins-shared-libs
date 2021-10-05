@@ -48,7 +48,7 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
            cp -R api_webgisclient/qwc-service/index.html config/default
         """
         }
-    PODNAME= sh([script: 'oc get pods -o custom-columns=POD:.metadata.name --no-headers -n ${namespace} | grep qgis-server | grep -v -E -m 1 "featureinfo|build|print"', returnStdout: true]).trim()
+    PODNAME= sh([script: 'oc get pods -o custom-columns=POD:.metadata.name --no-headers -n ${namespace} | grep qgis-server | grep -v -E -m 1 "featureinfo|build|print|deploy"', returnStdout: true]).trim()
     sh """
         oc rsync -n ${namespace} config/ $PODNAME:${targetPath}
     """
