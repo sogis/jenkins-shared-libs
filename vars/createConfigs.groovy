@@ -1,4 +1,4 @@
-def call(String environment, String dbuser,String dbuserpwd, String dbserver, String dbname, String configFileName, String serviceName, String mapping, String schemaDirName = "") {
+def call(String environment, String branch, String dbuser,String dbuserpwd, String dbserver, String dbname, String configFileName, String serviceName, String mapping, String schemaDirName = "") {
     if ( schemaDirName != "" ) {
         schemaDir = schemaDirName
         }
@@ -29,7 +29,7 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
         fi
 
         # sql2json command to create the config file
-        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t api_webgisclient/sql2json/templates/${serviceName}/template.json -o config/default/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${serviceName}.json
+        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t api_webgisclient/sql2json/templates/${serviceName}/template.json -o config/default/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/${branch}/schemas/${mapping}-${serviceName}.json
         
         # grep for qgis-server pod name
     """
