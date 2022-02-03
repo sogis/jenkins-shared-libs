@@ -1,10 +1,10 @@
-def call(String appName, String repo, String stage, String params, String configFileName, String jobName, String buildNumber, String arguments) {
+def call(String appName, String repo, String stage, String params, String configFileName, String jobName, String buildNumber, String branch, String arguments) {
     sh """
        pwd
        if [ -d "qwc_services" ]; then
          rm -rf qwc_services/* rm -rf qwc_services/.git
        fi
-       git clone https://github.com/sogis/qwc_services.git
+       git clone -b $branch https://github.com/sogis/qwc_services.git
     """
     dir("qwc_services") {
        sh """
