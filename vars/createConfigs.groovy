@@ -29,7 +29,6 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
         fi
 
         # sql2json command to create the config file
-        pwd
         java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t https://raw.githubusercontent.com/sogis/pipelines/master/api_webgisclient/sql2json/templates/${serviceName}/template.json -o $env.WORKSPACE/config/default/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${serviceName}.json
         
         # grep for qgis-server pod name
