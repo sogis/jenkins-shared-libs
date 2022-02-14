@@ -24,7 +24,7 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
 
         # if not exists get the sql2json.jar and set the necessary permissions
         if [ ! -f "sql2json.jar" ]; then
-          wget https://github.com/sogis/simi-sql2json/releases/download/v1.1.34/sql2json.jar
+          wget https://github.com/sogis/simi-sql2json/releases/download/v1.1.35/sql2json.jar
           chmod u+x sql2json.jar
         fi
 
