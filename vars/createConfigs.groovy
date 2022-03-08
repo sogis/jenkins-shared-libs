@@ -5,7 +5,7 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
     else {
         schemaDir = mapping + '-' + serviceName
         } 
-    if ( serviceName == "wms-qgs-content" || serviceName == "wfs-qgs-content" || serviceName == "print-qgs-content" ) {
+    if ( schemaName == "wms-qgs-content" || schemaName == "wfs-qgs-content" || schemaName == "print-qgs-content" ) {
         targetPath = '/data'
         githubRepo = 'sogis'
         }
