@@ -8,10 +8,12 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
     if ( schemaName == "wms-qgs-content" || schemaName == "wfs-qgs-content" || schemaName == "print-qgs-content" ) {
         targetPath = '/data'
         githubRepo = 'sogis'
+        templatePath = schemaName + '/template.json'
         }
     else {
         targetPath = '/data/config'
         githubRepo = 'qwc-services'
+        templatePath = 'template.json'
         }
     sh """ 
         if [ -d "sql2json" ]; then
@@ -29,7 +31,7 @@ def call(String environment, String dbuser,String dbuserpwd, String dbserver, St
         fi
 
         # sql2json command to create the config file
-        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t api_webgisclient/${serviceName}/sql2json/template.json -o config/default/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${schemaName}.json
+        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t api_webgisclient/${serviceName}/sql2json/${templatePath} -o config/default/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${schemaName}.json
         
         # grep for qgis-server pod name
     """
