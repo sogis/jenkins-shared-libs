@@ -1,17 +1,19 @@
-def call(String environment, String dbuser,String dbuserpwd, String dbserver, String dbname, String configFileName, String serviceName, String mapping, String schemaDirName = "") {
+def call(String environment, String dbuser,String dbuserpwd, String dbserver, String dbname, String configFileName, String serviceName, String schemaName, String mapping, String schemaDirName = "") {
     if ( schemaDirName != "" ) {
         schemaDir = schemaDirName
         }
     else {
         schemaDir = mapping + '-' + serviceName
         } 
-    if ( serviceName == "wms-qgs-content" || serviceName == "wfs-qgs-content" || serviceName == "print-qgs-content" ) {
+    if ( schemaName == "wms-qgs-content" || schemaName == "wfs-qgs-content" || schemaName == "print-qgs-content" ) {
         targetPath = '/data'
-        githubRepo = 'simi-so'
+        githubRepo = 'sogis'
+        templatePath = schemaName + '/template.json'
         }
     else {
         targetPath = '/data/config'
         githubRepo = 'qwc-services'
+        templatePath = 'template.json'
         }
     sh """ 
         if [ -d "sql2json" ]; then
