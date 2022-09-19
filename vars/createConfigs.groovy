@@ -40,7 +40,7 @@ def call(String environment, String branch, String dbuser,String dbuserpwd, Stri
            cp -R api_webgisclient/landreg-service/grundbuchplanauszug.qgs api_webgisclient/landreg-service/print config
         """
         }
-    else if ( serviceName == "map-viewer" ) {
+    else if ( serviceName == "qwc-service" ) {
         if ( environment == "gdi-production" ) {
             sh """
                 sed -i "s|geo-i.so.ch/analytics|geo.so.ch/analytics|" api_webgisclient/qwc-service/index.html
