@@ -54,6 +54,9 @@ def call(String environment, String branch, String dbuser,String dbuserpwd, Stri
     sh """
         oc rsync -n ${namespace} config/ $PODNAME:${targetPath}
     """
+    dir("$env.WORKSPACE/config/default") {
+        stash name: configFileName, includes: configFileName
+    }
     archiveArtifacts artifacts: 'config/**', onlyIfSuccessful: true, allowEmptyArchive: true
     sh """
         rm -rf $env.WORKSPACE/config
