@@ -34,6 +34,12 @@ def call(String appName, String repo, String stage, String params, String config
              filetypes = '*.json'
              gitAddFiles = appName + '/' + configFileName + ' ' + appName + '/permissions.json'
              }
+          // Der folgende wget-Befehl funktioniert seit der Umstellung auf Active Directory nicht mehr,
+          // weil es den apiUser dort nicht mehr gibt.
+          // Allerdings wird der gesamte Code innerhalb dieses if-Blocks gar nicht mehr gebraucht,
+          // seit nur noch beim featureinfo-service überhaupt ein Build gemacht wird.
+          // Falls der Code irgendwann wieder benötigt werden sollte, müsste statt dem wget-Befehl
+          // stash/unstash eingesetzt werden.
           sh """
              wget -r -np -nd -erobots=off -A '$filetypes' --reject-regex '/\\*.+\\*/|auto_refresh' --no-check-certificate --auth-no-challenge --user='$apiUser' --password='$PwdApiUser'  '$JENKINS_URL/job/$jobName/$buildNumber/artifact/config/default/' -P $appName
              ls -la data-service
