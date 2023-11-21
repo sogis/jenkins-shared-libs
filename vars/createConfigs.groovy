@@ -36,7 +36,7 @@ def call(String environment, String branch, String dbuser,String dbuserpwd, Stri
         
         # grep for qgis-server pod name
     """
-    if ( serviceName == "wms-qgs-content" ) {
+    if ( schemaName == "wms-qgs-content" ) {
         sh """
            cp -R api_webgisclient/landreg-service/grundbuchplanauszug.qgs api_webgisclient/landreg-service/print config
         """
