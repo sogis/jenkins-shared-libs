@@ -51,7 +51,7 @@ def call(String environment, String branch, String dbuser,String dbuserpwd, Stri
            cp -R api_webgisclient/qwc-service/index.html config/default
         """
         }
-    PODNAME= sh([script: 'oc get pods -o custom-columns=POD:.metadata.name --no-headers -n ${namespace} | grep qgis-server | grep -v -E -m 1 "featureinfo|build|print|deploy"', returnStdout: true]).trim()
+    PODNAME= sh([script: 'oc get pods -o custom-columns=POD:.metadata.name --no-headers --field-selector=status.phase=Running -n ${namespace} | grep qgis-server | grep -v -E -m 1 "featureinfo|build|print|deploy"', returnStdout: true]).trim()
     sh """
         oc rsync -n ${namespace} config/ $PODNAME:${targetPath}
     """
