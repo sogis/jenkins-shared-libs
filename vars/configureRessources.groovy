@@ -1,7 +1,5 @@
-def call(String stage, String file, String parameters){
+def call(String appName, String stage, String repo, String environment){
     sh """
-       ls -la
-       pwd
-       oc process $file $parameters | oc apply -n $stage -f- 
+       oc process -f ${repo}/resources.yaml -p \$(curl -s ${repo}/${appName}_resources_${environment}.params) | oc apply -n $stage -f- 
     """
 }
