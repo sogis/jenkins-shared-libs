@@ -5,7 +5,7 @@ def call(String appName, String stage, String repo, String environment){
        if (( statuscode == 200 )); then
          pwd
          gpg --quiet --batch --yes --decrypt --passphrase $env.GPG_DECRYPT_PW --output ${appName}_resources_${environment}.params ${appName}_resources_${environment}.params.gpg
-         oc process -f ${repo}/resources.yaml -p ${appName}_resources_${environment}.params | oc apply -n $stage -f- 
+         oc process -f ${repo}/resources.yaml --param-file ${appName}_resources_${environment}.params | oc apply -n $stage -f- 
        else
          oc process -f ${repo}/resources.yaml | oc apply -n $stage -f-
        fi
