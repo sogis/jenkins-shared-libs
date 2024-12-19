@@ -38,15 +38,16 @@ def call(String environment, String branch, String dbuser,String dbuserpwd, Stri
         # if not exists get the sql2json.jar and set the necessary permissions
         if [ ! -f "sql2json.jar" ]; then
           wget https://github.com/sogis/simi-sql2json/releases/download/v1.1.35/sql2json.jar
-          whoami
+          wget --header='Authorization: token ${PwdGitUser}' https://raw.githubusercontent.com/sogis/pipelines/${branch}/api_webgisclient/${serviceName}/sql2json/${templatePath}
+          wget --header='Authorization: token ${PwdGitUser}' https://raw.githubusercontent.com/sogis/pipelines/${branch}/api_webgisclient/${serviceName}/sql2json/${mysochTemplatePath}
           chmod u+x sql2json.jar
         fi
 
         # sql2json command to create the config file in default directory
-        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t https://raw.githubusercontent.com/sogis/pipelines/${branch}/api_webgisclient/${serviceName}/sql2json/${templatePath} -o $env.WORKSPACE/config/default/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${schemaName}.json
+        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t ${templatePath} -o $env.WORKSPACE/config/default/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${schemaName}.json
         
         # sql2json command to create the config file in mysoch directory
-        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t https://raw.githubusercontent.com/sogis/pipelines/${branch}/api_webgisclient/${serviceName}/sql2json/${mysochTemplatePath} -o $env.WORKSPACE/config/mysoch/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${schemaName}.json
+        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t ${mysochTemplatePath} -o $env.WORKSPACE/config/mysoch/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${schemaName}.json
 
         # grep for qgis-server pod name
     """
