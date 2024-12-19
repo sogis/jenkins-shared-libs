@@ -44,11 +44,10 @@ def call(String environment, String branch, String dbuser,String dbuserpwd, Stri
         fi
 
         # sql2json command to create the config file in default directory
-        pwd
-        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t $env.WORKSPACE/config/default/${templatePath} -o $env.WORKSPACE/config/default/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${schemaName}.json
+        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t $env.WORKSPACE/${templatePath} -o $env.WORKSPACE/config/default/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${schemaName}.json
         
         # sql2json command to create the config file in mysoch directory
-        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t $env.WORKSPACE/config/default/${mysochTemplatePath} -o $env.WORKSPACE/config/mysoch/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${schemaName}.json
+        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t $env.WORKSPACE/${mysochTemplatePath} -o $env.WORKSPACE/config/mysoch/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${schemaName}.json
 
         # grep for qgis-server pod name
     """
