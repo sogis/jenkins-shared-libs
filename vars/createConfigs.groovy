@@ -42,8 +42,9 @@ def call(String environment, String branch, String dbuser,String dbuserpwd, Stri
         fi
 
         # sql2json command to create the config file in default directory
-        ls -la 
         git checkout ${branch}
+        ls -la 
+        pwd
         java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t $env.WORKSPACE/sql2json/${templatePath} -o $env.WORKSPACE/config/default/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${schemaName}.json
         
         # sql2json command to create the config file in mysoch directory
