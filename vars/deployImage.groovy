@@ -9,7 +9,7 @@ def call(String appName, String stage, String branch, String environment, String
         oc process -f api_webgisclient/${appName}/deployment/deployment.yaml --param-file api_webgisclient/${appName}/deployment/${appName}_deployment_${environment}.params | oc apply -n $stage -f-
     """
     if (deploymentType == 'Rollout') {
-        sh "oc rollout restart deployment ${appName}"
+        sh "oc rollout restart deployment ${appName} -n $stage"
     }
     sh """
         oc rollout status -n $stage deployment $appName
