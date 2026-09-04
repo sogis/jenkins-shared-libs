@@ -27,12 +27,12 @@ def call(String environment, String branch, String dbuser,String dbuserpwd, Stri
           rm -rf sql2json/* rm -rf sql2json/.git
         fi
         
-        if [ ! -d  "/qgs-resoruces/config/default" ]; then
-          mkdir -p /qgs-resources/config/default
+        if [ ! -d  "config/default" ]; then
+          mkdir -p config/default
         fi
 
-        if [ ! -d  "/qgs-resources/config/mysoch" ]; then
-          mkdir -p /qgs-resources/config/mysoch
+        if [ ! -d  "config/mysoch" ]; then
+          mkdir -p config/mysoch
         fi
 
         # if not exists get the sql2json.jar and set the necessary permissions
@@ -45,17 +45,17 @@ def call(String environment, String branch, String dbuser,String dbuserpwd, Stri
         git checkout ${branch}
         ls -la 
         pwd
-        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t $env.WORKSPACE/api_webgisclient/${serviceName}/sql2json/${templatePath} -o /qgs-resources/config/default/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${schemaName}.json
+        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t $env.WORKSPACE/api_webgisclient/${serviceName}/sql2json/${templatePath} -o $env.WORKSPACE/config/default/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${schemaName}.json
         
         # sql2json command to create the config file in mysoch directory
-        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t $env.WORKSPACE/api_webgisclient/${serviceName}/sql2json/${mysochTemplatePath} -o /qgs-resources/config/mysoch/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${schemaName}.json
+        java -jar sql2json.jar -c jdbc:postgresql://${dbserver}:5432/${dbname} -u ${dbuser} -p ${dbuserpwd} -t $env.WORKSPACE/api_webgisclient/${serviceName}/sql2json/${mysochTemplatePath} -o $env.WORKSPACE/config/mysoch/${configFileName} -s https://raw.githubusercontent.com/${githubRepo}/${schemaDir}/master/schemas/${mapping}-${schemaName}.json
         git checkout ${branch_webgisclient}
 
         # grep for qgis-server pod name
     """
     if ( schemaName == "wms-qgs-content" ) {
         sh """
-           cp -R api_webgisclient/landreg-service/grundbuchplanauszug.qgs api_webgisclient/landreg-service/print /qgs-resources
+           cp -R api_webgisclient/landreg-service/grundbuchplanauszug.qgs api_webgisclient/landreg-service/print config
         """
         }
     else if ( serviceName == "qwc-service" ) {
@@ -65,11 +65,18 @@ def call(String environment, String branch, String dbuser,String dbuserpwd, Stri
             """
             }
         sh """
-           cp -R api_webgisclient/qwc-service/index.html /qgs-resources/config/default/
+           cp -R api_webgisclient/qwc-service/index.html config/default
         """
         }
-    dir("/qgs-resources/config/default") {
+    PODNAME= sh([script: 'oc get pods -o custom-columns=POD:.metadata.name --no-headers --field-selector=status.phase=Running -n ${namespace} | grep qgis-server | grep -v -E -m 1 "featureinfo|build|print|deploy"', returnStdout: true]).trim()
+    sh """
+        oc rsync -n ${namespace} config/ $PODNAME:${targetPath}
+    """
+    dir("$env.WORKSPACE/config/default") {
         stash name: configFileName, includes: configFileName
     }
-    archiveArtifacts artifacts: '/qgs-resources/**', onlyIfSuccessful: true, allowEmptyArchive: true
+    archiveArtifacts artifacts: 'config/**', onlyIfSuccessful: true, allowEmptyArchive: true
+    sh """
+        rm -rf $env.WORKSPACE/config
+    """
     }
