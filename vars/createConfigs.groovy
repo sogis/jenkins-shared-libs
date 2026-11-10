@@ -37,6 +37,10 @@ def call(String environment, String branch, String dbuser,String dbuserpwd, Stri
           mkdir -p config/mysoch
         fi
 
+        if [ ! -d  "config/qgs" ]; then
+          mkdir -p config/qgs
+        fi
+
         # if not exists get the sql2json.jar and set the necessary permissions
         if [ ! -f "sql2json.jar" ]; then
           wget https://github.com/sogis/simi-sql2json/releases/download/v1.1.35/sql2json.jar
@@ -57,7 +61,7 @@ def call(String environment, String branch, String dbuser,String dbuserpwd, Stri
     """
     if ( schemaName == "wms-qgs-content" ) {
         sh """
-           cp -R api_webgisclient/landreg-service/grundbuchplanauszug.qgs api_webgisclient/landreg-service/print config
+           cp -R api_webgisclient/landreg-service/grundbuchplanauszug.qgs api_webgisclient/landreg-service/print config/qgs
         """
         }
     else if ( serviceName == "qwc-service" ) {
